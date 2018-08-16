@@ -1,5 +1,5 @@
-require_relative "meme_generate/version"
-require_relative "meme_generate/memegen"
+require_relative 'meme_generate/version'
+require_relative 'meme_generate/memegen'
 
 #
 # Module MemeGenerate provides interface as a ruby client for https://memegen.link/

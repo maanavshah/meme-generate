@@ -1,5 +1,5 @@
-# MemeGenerate
-This is a ruby driver that generate memes using https://memegen.link/.
+# meme_generate
+A ruby client for generating memes using https://memegen.link/
 
 ## Installation
 

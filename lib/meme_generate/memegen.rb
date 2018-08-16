@@ -1,4 +1,4 @@
-require "unirest"
+require 'unirest'
 require 'logger'
 
 #
@@ -45,7 +45,7 @@ module Memegen
   # @return Array List of fonts
   #
   def list_fonts
-    response = Unirest.get("https://memegen.link/api/fonts")
+    response = Unirest.get('https://memegen.link/api/fonts')
     response.body
   end
 
@@ -77,8 +77,8 @@ module Memegen
 
     unless invalid
       # Replace the reserve words
-      reserved_characters.each { |k,v| title.gsub!(k.to_s, v.to_s) }
-      reserved_characters.each { |k,v| caption.gsub!(k.to_s, v.to_s) }
+      reserved_characters.each { |k, v| title.gsub!(k.to_s, v.to_s) }
+      reserved_characters.each { |k, v| caption.gsub!(k.to_s, v.to_s) }
 
       # Generate the url
       url = "https://memegen.link/custom/#{title}/#{caption}.jpg?alt=#{image}"
@@ -89,12 +89,12 @@ module Memegen
       options[:width] = @width.to_i if @width.to_i > 100
       options[:height] = @height.to_i if @height.to_i > 100
       options[:share] = (@share == true)
-      options.reject! { |k,v| v.empty? }
-      if options.empty? || options.nil?
-        response = Unirest.get(url)
-      else
-        response = Unirest.get(url, parameters: options)
-      end
+      options.reject! { |_k, v| v.empty? }
+      response = if options.empty? || options.nil?
+                   Unirest.get(url)
+                 else
+                   Unirest.get(url, parameters: options)
+                 end
 
       # Writing image
       File.open("#{Time.now.to_i}.jpeg", 'w+') do |f|
@@ -105,7 +105,7 @@ module Memegen
     end
   end
 
-private
+  private
 
   #
   # Check if the image exists on remote URL
